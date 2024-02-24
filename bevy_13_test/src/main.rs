@@ -7,10 +7,20 @@ use bevy::prelude::*;
 use camera::CameraPlugin;
 use player::PlayerPlugin;
 use movable::MovingPlugin;
+use bevy::window::WindowMode::Fullscreen;
 
 fn main() {
     App::new()
-        .add_plugins(DefaultPlugins)
+        .add_plugins(DefaultPlugins.set(WindowPlugin {
+            primary_window: Some(Window {
+                title: "RogueGame".into(),
+                //resolution: (600., 100.).into(),
+                resizable: true,
+                mode: Fullscreen,
+                ..default()
+            }),
+            ..default()
+        }))
         .add_plugins(CameraPlugin)
         .add_plugins(PlayerPlugin)
         .add_plugins(MovingPlugin)
